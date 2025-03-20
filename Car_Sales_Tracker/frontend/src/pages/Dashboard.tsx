@@ -2,6 +2,9 @@ import React from 'react';
 import { SignedIn, SignedOut, SignInButton } from "@clerk/clerk-react";
 import {Card, CardContent, CardHeader, CardTitle} from '@/components/ui/card'
 import SalesChartDB from '@/components/ui/SalesChartDB';
+import TableDB from '@/components/ui/TableDB';
+import { SaleFromPopOver } from '@/components/ui/SaleFromPopOver';
+import AddSalesForm from '@/components/ui/AddSalesForm';
 
 
 
@@ -9,10 +12,11 @@ const Dashboard = () => {
   return (
     <div>
       <SignedIn>
-        <h1>Welcome to your Dashboard!</h1>
-          <div className='p-6'>
-            <h1>Dashboard Overview</h1>
-            <div className='grid lg:grid-cols-4 sm:grid-cols-2  gap-4 mb-6 '>
+        <h1 className='mb-15'>Welcome to your Dashboard!</h1>
+          <div className='p-6 '>
+            {/* <h1>Dashboard Overview</h1> */}
+            <SaleFromPopOver/>
+            <div className='grid lg:grid-cols-4 sm:grid-cols-2  gap-4 mb-6 mt-8 '>
               {/* Total revenue */}
               <Card className='w-full h-auto'>
                 <CardContent className='text-left'>
@@ -65,7 +69,7 @@ const Dashboard = () => {
               </Card>
 
               <Card>
-
+                <TableDB />
               </Card>
 
             </div>

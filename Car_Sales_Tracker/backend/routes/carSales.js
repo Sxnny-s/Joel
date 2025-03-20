@@ -90,7 +90,7 @@ router.delete('/salesData/:id', async (req,res) => {
         console.error("Error deleting sales data", error)
         res.status(500).json({error: 'Internal Server Error'})
     }
-E
+
 
 })
 

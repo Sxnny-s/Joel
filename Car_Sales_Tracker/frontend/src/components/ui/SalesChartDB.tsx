@@ -1,4 +1,4 @@
-import { Bar, BarChart, CartesianGrid, XAxis } from "recharts"
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts"
 import { ChartConfig, ChartContainer } from "@/components/ui/chart"
 import { ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
 import { ChartLegend, ChartLegendContent } from "@/components/ui/chart"
@@ -33,6 +33,7 @@ const SalesChartDB = () => {
         <ChartContainer config={chartConfig} className='min-h-[200px] w-full'>
             <BarChart accessibilityLayer data={chartData}>
             <CartesianGrid vertical={false}/>
+            <YAxis/>
             <XAxis
                 dataKey="month"
                 tickLine={false}
@@ -40,6 +41,7 @@ const SalesChartDB = () => {
                 axisLine={false}
                 tickFormatter={(value) => value.slice(0, 3)}
             />
+
             <ChartTooltip content={<ChartTooltipContent/>} />
             <ChartLegend content={<ChartLegendContent/>}/>
             <Bar dataKey="carsales" fill='var(--color-carsales)' radius={4} /> 
