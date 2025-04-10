@@ -7,8 +7,9 @@ const AddSalesForm = () => {
 
   function onSubmit(data) {
     console.log(data)
+    console.log(username)
   }
-
+  
 
   return (
       <>
