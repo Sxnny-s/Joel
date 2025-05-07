@@ -55,7 +55,7 @@ const formSchema = z.object({
 });
 
 const AddSalesForm = () => {
-   // 1. Define your form.
+   
    const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {

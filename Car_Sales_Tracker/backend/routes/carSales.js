@@ -2,44 +2,34 @@ const CarSale = require('../models/carSale')
 const express = require('express')
 const app = express()
 const router = express.Router()
-
+const carSaleScheme = require('../schemas/carSaleSchema')
 
 
 // add new car to database
 router.post('/addCarSale',async (req,res) => {
+
+    userId = req.auth.userId
+
     try {
-        // Deconstructing request body
-        const 
-            {   customerDOB,
-                dateClosed,
-                paymentOption,
-                salesPerson,
-                customerPhoneNumber,
-                VIN,
-                closedPrice,
-                FinanceSales,
-                totalProfit,
-                userId
-            } = req.body
-        
-        // Creating a new sale object  
-        const newSale = new CarSale({
-            customerDOB,
-            dateClosed,
-            paymentOption,
-            salesPerson,
-            customerPhoneNumber,
-            VIN,
-            closedPrice,
-            FinanceSales,
-            totalProfit,
-            userId
+        // validate the request body form zod schema
+        const validatedData = carSaleScheme.parse(req.body)
+
+        // Create a new sale object
+        const newSale = new carSaleScheme({
+            ...validatedData,
+            userId,
         })
-        // saving to database
-        await newSale.save()
-        res.status(201).json(newSale)
-        
+
+         // save to DB
+         await newSale.save();
+         res.status(201).json(newSale);
+
     } catch (error) {
+
+        if (error instanceof z.ZodError) {
+            return res.status(400).json({errors: error.errors})
+        }
+
         console.error('Error saving sales Data',error)
         res.status(500).json({error: 'Internal erver Error'})
     }

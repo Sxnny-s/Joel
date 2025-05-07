@@ -3,9 +3,11 @@ const app = express()
 const cors = require('cors')
 const mongoose = require('mongoose')
 const Router = require('./routes/carSales')
+const { requireAuth } = require('@clerk/express')
 require('dotenv').config()
 app.use(express.json())
 app.use(cors())
+app.use(requireAuth())
 
 const URL = process.env.URL
 const PORT = process.env.PORT
