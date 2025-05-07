@@ -31,6 +31,8 @@ const carSaleSchema = new mongoose.Schema({
   userId: { type: String, required: true },
 });
 
+// adding indexing to the user id field for more efficient searching 
+
 const CarSale = mongoose.model('CarSale', carSaleSchema);
 
 module.exports = CarSale;

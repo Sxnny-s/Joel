@@ -5,7 +5,7 @@ const router = express.Router()
 const carSaleScheme = require('../schemas/carSaleSchema')
 
 
-// add new car to database
+// add new car Sale to database
 router.post('/addCarSale',async (req,res) => {
 
     userId = req.auth.userId
