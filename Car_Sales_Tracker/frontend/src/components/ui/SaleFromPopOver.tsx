@@ -13,9 +13,8 @@ export const SaleFromPopOver = () => {
   return (
     <>
     <Popover>
-      <PopoverTrigger>
+      <PopoverTrigger asChild>
         <Button>Add Sale</Button>
-      
       </PopoverTrigger>
       <PopoverContent>
       <AddSalesForm/>
