@@ -35,17 +35,17 @@ router.post('/addCarSale',async (req,res) => {
     }
 })
 
-// Getting all Sales Data
-router.get('/salesData',async (req,res) => {
-    try {
-        const sales = await CarSale.find({})
-        res.json(sales)
+// // Getting all Sales Data
+// router.get('/salesData',async (req,res) => {
+//     try {
+//         const sales = await CarSale.find({})
+//         res.json(sales)
            
-    } catch (error) {
-        console.error("Error getting companies", error)
-        res.status(500).json({error: "internal Server Error"})
-    }
-})
+//     } catch (error) {
+//         console.error("Error getting companies", error)
+//         res.status(500).json({error: "internal Server Error"})
+//     }
+// })
 
 // getting all sales data for a single user
 router.get('/salesData/:id', async (req, res) => {
