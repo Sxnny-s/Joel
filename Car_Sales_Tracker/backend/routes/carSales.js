@@ -53,10 +53,6 @@ router.get('/salesData/:id', async (req, res) => {
         const id = req.params.id
         const userData = await CarSale.find({ userId: id}) 
 
-        if (userData.length === 0) {
-            return res.status(404).json({ error: "No sales found for this user." });
-        }
-
         res.json(userData)
     } catch (error) {
         console.error("Error getting users sales data", error)

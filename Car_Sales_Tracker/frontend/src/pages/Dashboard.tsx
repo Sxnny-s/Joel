@@ -6,9 +6,20 @@ import TableDB from '@/components/ui/TableDB';
 import { SaleFromPopOver } from '@/components/ui/SaleFromPopOver';
 import AddSalesForm from '@/components/ui/AddSalesForm';
 
+// Sales data
+
+import { useSalesData } from '../../hooks/useSalesData'
 
 
 const Dashboard = () => {
+
+  const {data , status, error } = useSalesData()
+
+  if (status === 'pending') return <p>Loading sales data</p>
+  if (status === 'error') return <p> Error loading data: {error} </p>
+
+
+
   return (
     <div>
       <SignedIn>
