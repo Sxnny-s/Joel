@@ -1,8 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const fetchUserSalesData = createAsyncThunk('/sales/DataById/' , async (id) => {
+    const localURL = 'http://localhost:5000'
+    const BASE_URL = 'https://car-api-0bgx.onrender.com'
     
-    const res = await fetch(`http://localhost:5000/api/data/salesData/${id}`,{
+    const res = await fetch(`${BASE_URL}/api/data/salesData/${id}`,{
         credentials: 'include'}
     )
 
