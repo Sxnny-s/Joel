@@ -8,7 +8,7 @@ const { requireAuth } = require('@clerk/express')
 require('dotenv').config()
 app.use(express.json())
 app.use(cors({
-  origin: 'https://joel-zeta.vercel.app/',
+  origin: 'https://joel-zeta.vercel.app',
   credentials: true 
 }))
 app.use(requireAuth())
