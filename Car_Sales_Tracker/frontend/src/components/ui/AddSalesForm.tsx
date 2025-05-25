@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from "@hookform/resolvers/zod"
 
+
 import { Button } from "@/components/ui/button"
 import {
   Form,
@@ -22,12 +23,13 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 
+import sales  from '../../services/sales'
+
 
 const formSchema = z.object({
 
   // 1. Customer Information
   buyerName: z.string().min(2, { message: "Name must be at least 2 characters." }),
-  buyerDOB: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, { message: "DOB must be in YYYY-MM-DD format." }),
   customerPhone: z.string().min(10, { message: "Phone number must be at least 10 digits." }),
 
   // 2. Deal Details
@@ -38,7 +40,7 @@ const formSchema = z.object({
   dealCredit: z.enum(["50%", "100%"], { message: "Must be either 50% or 100%." }),
 
   // 3. Vehicle Information
-  stockNumber: z.string().min(1, { message: "Stock number is required." }),
+  // stockNumber: z.string().min(1, { message: "Stock number is required." }),
   stockType: z.enum(["new", "used"], { message: "Must be new or used." }),
   year: z.number().min(1900).max(new Date().getFullYear() + 1),
   make: z.string().min(1, { message: "Make is required." }),
@@ -51,7 +53,7 @@ const formSchema = z.object({
   financeSales: z.number().nonnegative({ message: "Finance sales must be a positive number." }),
 
   // 5. Personnel
-  salesperson: z.string().min(2, { message: "Salesperson name is required." }),
+  salesperson: z.string().min(2, { message: "Sales person name is required." }),
 });
 
 const AddSalesForm = () => {
@@ -61,7 +63,6 @@ const AddSalesForm = () => {
     defaultValues: {
       // 1. Customer Information
       buyerName: "",
-      buyerDOB: "", // should match YYYY-MM-DD format
       customerPhone: "",
   
       // 2. Deal Details
@@ -72,7 +73,7 @@ const AddSalesForm = () => {
       dealCredit: "100%", // one of: "50%", "100%"
   
       // 3. Vehicle Information
-      stockNumber: "",
+      // stockNumber: "",
       stockType: "used", // one of: "new", "used"
       year: new Date().getFullYear(), // sensible default
       make: "",
@@ -91,10 +92,15 @@ const AddSalesForm = () => {
   
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values)
+ async function onSubmit(values: z.infer<typeof formSchema>)  {
+
+    try {
+      const postReq = await sales.Create(values)
+      console.log('Req',postReq)
+      console.log('values',values)
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   
@@ -231,6 +237,7 @@ const AddSalesForm = () => {
         control={form.control}
         name="stockType"
         render={({ field }) => (
+
           <FormItem>
             <FormLabel>Stock Type</FormLabel>
             <FormControl>
@@ -240,8 +247,8 @@ const AddSalesForm = () => {
               </SelectTrigger>
 
               <SelectContent>
-                <SelectItem value="New">New</SelectItem>
-                <SelectItem value="Used">Used</SelectItem>
+                <SelectItem value="new">New</SelectItem>
+                <SelectItem value="used">Used</SelectItem>
               </SelectContent>
               
             </Select>
@@ -258,7 +265,7 @@ const AddSalesForm = () => {
           <FormItem>
             <FormLabel>Year</FormLabel>
             <FormControl>
-              <Input type="number" placeholder="Enter year" {...field} />
+              <Input type="number" placeholder="Enter year" {...field} onChange={(e) => field.onChange(e.target.value === '' ? '' : Number(e.target.value))}  />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -314,7 +321,7 @@ const AddSalesForm = () => {
           <FormItem>
             <FormLabel>Close Price</FormLabel>
             <FormControl>
-              <Input type="number" placeholder="Enter close price" {...field} />
+              <Input type="number" placeholder="Enter close price" {...field} onChange={(e) => field.onChange(e.target.value === ''? '' : Number(e.target.value))}  />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -328,12 +335,13 @@ const AddSalesForm = () => {
           <FormItem>
             <FormLabel>Total Profit</FormLabel>
             <FormControl>
-              <Input type="number" placeholder="Enter total profit" {...field} />
+              <Input type="number" placeholder="Enter total profit" {...field} onChange={(e) => field.onChange(e.target.value === "" ? '' : Number(e.target.value))} />
             </FormControl>
             <FormMessage />
           </FormItem>
         )}
         />
+
 
       <FormField
         control={form.control}
@@ -342,7 +350,8 @@ const AddSalesForm = () => {
           <FormItem>
             <FormLabel>Finance Sales</FormLabel>
             <FormControl>
-              <Input type="number" placeholder="Enter finance sales" {...field} />
+              
+              <Input  type="number" placeholder="Enter finance sales"  {...field}  onChange={(e) => field.onChange(e.target.value === "" ? '' : Number(e.target.value))} />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -354,7 +363,7 @@ const AddSalesForm = () => {
         name="salesperson"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Salesperson</FormLabel>
+            <FormLabel>Sales Person</FormLabel>
             <FormControl>
               <Input placeholder="Enter salesperson name" {...field} />
             </FormControl>

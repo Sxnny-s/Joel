@@ -3,10 +3,12 @@ const express = require('express')
 const app = express()
 const router = express.Router()
 const carSaleScheme = require('../schemas/carSaleSchema')
+const { z } = require('zod')
 
 
 // add new car Sale to database
 router.post('/addCarSale',async (req,res) => {
+    
 
     userId = req.auth.userId
 
@@ -14,11 +16,15 @@ router.post('/addCarSale',async (req,res) => {
         // validate the request body form zod schema
         const validatedData = carSaleScheme.parse(req.body)
 
+       
+
         // Create a new sale object
-        const newSale = new carSaleScheme({
+        const newSale = new CarSale({
             ...validatedData,
             userId,
         })
+
+        console.log(newSale)
 
          // save to DB
          await newSale.save();

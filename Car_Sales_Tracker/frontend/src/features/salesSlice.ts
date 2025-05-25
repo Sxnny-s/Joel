@@ -2,9 +2,9 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const fetchUserSalesData = createAsyncThunk('/sales/DataById/' , async (id) => {
     
-    console.log('Fetching sales data for ID:', id);
-    // const res = await fetch(`/salesData/${id}`)
-    const res = await fetch(`http://localhost:5000/salesData/${id}`)
+    const res = await fetch(`http://localhost:5000/api/data/salesData/${id}`,{
+        credentials: 'include'}
+    )
 
     const data = await res.json()
 

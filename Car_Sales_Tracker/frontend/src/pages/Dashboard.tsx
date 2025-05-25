@@ -7,16 +7,20 @@ import { SaleFromPopOver } from '@/components/ui/SaleFromPopOver';
 import AddSalesForm from '@/components/ui/AddSalesForm';
 
 // Sales data
-
 import { useSalesData } from '../../hooks/useSalesData'
-
+import { stats } from '../../utils/dashboardStats'
 
 const Dashboard = () => {
 
   const {data , status, error } = useSalesData()
 
-  if (status === 'pending') return <p>Loading sales data</p>
+  if (status === 'pending') return <p>Loading sales data</p>  
   if (status === 'error') return <p> Error loading data: {error} </p>
+  
+  const DBstats = stats(data) 
+
+  console.log(DBstats.monthlySummary)
+  
 
 
 
@@ -32,7 +36,7 @@ const Dashboard = () => {
               <Card className='w-full h-auto'>
                 <CardContent className='text-left'>
                   <div className='tracking-tight text-sm font-medium mb-2'>Total Revenue</div>
-                  <div className='text-2xl font-bold'>$420,545.52</div>
+                  <div className='text-2xl font-bold'>${DBstats.TotalRev}</div>
                   {/* <p className='text-xs text-muted-foreground'>+20.1% from last month</p> */}
                 </CardContent>
 
@@ -41,7 +45,7 @@ const Dashboard = () => {
               <Card className='w-full h-auto'>
                 <CardContent className='text-left'>
                   <div className='tracking-tight text-sm font-medium mb-2'>Total Profit</div>
-                  <div className='text-2xl font-bold'>$12,345.42</div>
+                  <div className='text-2xl font-bold'>${DBstats.TotalProfit}</div>
                   {/* <p className='text-xs text-muted-foreground'>+20.1% from last month</p> */}
                 </CardContent>
 
@@ -52,7 +56,7 @@ const Dashboard = () => {
               <Card className='w-full h-auto'>
                 <CardContent className='text-left'>
                   <div className='tracking-tight text-sm font-medium mb-2'>Total Sales</div>
-                  <div className='text-2xl font-bold'>83</div>
+                  <div className='text-2xl font-bold'>{DBstats.TotalSales}</div>
                   {/* <p className='text-xs text-muted-foreground'>+3.1% from last month</p> */}
                 </CardContent>
 
@@ -61,22 +65,17 @@ const Dashboard = () => {
               {/* Highest Sale Month  */}
               <Card className='w-full h-auto'>
                 <CardContent className='text-left'>
-                  <div className='tracking-tight text-sm font-medium mb-2'>Sales/Profit (Last 30 days)</div>
-                  <div className='text-2xl font-bold'>+19 |  $14,345 </div>
+                  <div className='tracking-tight text-sm font-medium mb-2'>Sales/Profit  --- ( {new Date().toLocaleString('default', {month: 'long'})} )</div>
+                  <div className='text-2xl font-bold'>+{DBstats.SalesThisMonth} |  ${DBstats.ProfitThisMonth} </div>
                   <p className='text-xs text-muted-foreground'>+12.5% from last month</p>
                 </CardContent>
 
               </Card>
             </div>
 
-
-
-
-
-
             <div className='grid lg:grid-cols-[55%_45%] sm:grid-cols-1 gap-4'>
               <Card>
-                <SalesChartDB/>
+                <SalesChartDB   data={DBstats}/>
               </Card>
 
               <Card>
@@ -84,18 +83,9 @@ const Dashboard = () => {
               </Card>
 
             </div>
-
-
-
+  
           </div>
           
-
-
-
-
-
-
-
       </SignedIn>
       <SignedOut>
         <p>Please sign in to view your dashboard.</p>
