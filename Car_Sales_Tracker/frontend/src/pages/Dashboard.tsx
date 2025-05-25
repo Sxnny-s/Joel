@@ -67,7 +67,7 @@ const Dashboard = () => {
                 <CardContent className='text-left'>
                   <div className='tracking-tight text-sm font-medium mb-2'>Sales/Profit  --- ( {new Date().toLocaleString('default', {month: 'long'})} )</div>
                   <div className='text-2xl font-bold'>+{DBstats.SalesThisMonth} |  ${DBstats.ProfitThisMonth} </div>
-                  <p className='text-xs text-muted-foreground'>+12.5% from last month</p>
+                  {/* <p className='text-xs text-muted-foreground'>+12.5% from last month</p> */}
                 </CardContent>
 
               </Card>
