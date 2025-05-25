@@ -11,7 +11,7 @@ app.use(cors({
   origin: 'https://joel-zeta.vercel.app',
   credentials: true 
 }))
-app.use(requireAuth())
+// app.use(requireAuth())
 
 const CLERK_PUBLISHABLE_KEY = process.env.CLERK_PUBLISHABLE_KEY
 const URL = process.env.URL
@@ -25,7 +25,7 @@ mongoose.connect(URL)
     .then(() => console.log('MongoDB Connected'))
     .catch((error) => console.error('MongoDb connection error:', error))
     
-app.use('/api/data', Router)
+app.use('/api/data',requireAuth(), Router)
 
 
 
