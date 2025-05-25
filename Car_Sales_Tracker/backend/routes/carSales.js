@@ -9,7 +9,6 @@ const { z } = require('zod')
 // add new car Sale to database
 router.post('/addCarSale',async (req,res) => {
     
-
     userId = req.auth.userId
 
     try {
@@ -85,6 +84,7 @@ router.delete('/salesData/:id', async (req,res) => {
 
 
 })
+// UPDATE Sale
 
 router.put('/salesData/:id', async (req, res) => {
     try {
