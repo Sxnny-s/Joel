@@ -17,14 +17,13 @@ const TableDB = () => {
         <TableCaption>Recent Sales</TableCaption>
 
         <TableHeader>
-            <TableRow>
+            {/* <TableRow>
                 <TableHead className="w-[120px]">Sale Date</TableHead>
                 <TableHead>Customer Name</TableHead>
                 <TableHead>Car Sold</TableHead>
                 <TableHead>Payment Method</TableHead>
-                <TableHead>Follow-up Done</TableHead>
                 <TableHead className="text-right">Net Profit</TableHead>
-            </TableRow>
+            </TableRow> */}
         </TableHeader>
 
         <TableBody>

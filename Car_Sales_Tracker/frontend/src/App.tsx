@@ -7,12 +7,18 @@ import Dashboard from './pages/Dashboard'
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/clerk-react";
 
 
+
+import { ThemeProvider } from "./components/ui/theme-provider"
+
 function App() {
 
   return (
     <>
+    <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
     <header>
+    
       <SignedOut>
+  
         <SignInButton />
       </SignedOut>
       <SignedIn>
@@ -20,9 +26,13 @@ function App() {
         <UserButton />
       </SignedIn>
     </header>
+
+
+
     <Routes>
       <Route path='/' element={<Dashboard/> } />
     </Routes>
+    </ThemeProvider>
 
 
     </>
