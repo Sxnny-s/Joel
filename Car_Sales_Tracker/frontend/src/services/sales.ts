@@ -4,9 +4,11 @@ import axios from 'axios'
 
 
 const Create = async (data : any) => {
+    
+    const url = `${BASE_URL}/api/data/addCarSale`
 
     try {
-        const res = await axios.post(`${BASE_URL}/api/data/addCarSale`, data, {
+        const res = await axios.post(`${url}`, data, {
             withCredentials: true
         })
         return res.data
