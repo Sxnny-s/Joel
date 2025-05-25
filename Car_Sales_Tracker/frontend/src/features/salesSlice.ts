@@ -1,12 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { useAuth } from "@clerk/clerk-react";
-
-const { getToken } = useAuth();
 
 
-const fetchUserSalesData = createAsyncThunk('/sales/DataById/' , async (id) => {
+const fetchUserSalesData = createAsyncThunk('/sales/DataById/' , async ({ id, token }) => {
 
-    const token = await getToken();
+    
 
     const localURL = 'http://localhost:5000'
     const BASE_URL = 'https://car-api-0bgx.onrender.com'
