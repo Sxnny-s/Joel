@@ -96,7 +96,7 @@ const AddSalesForm = () => {
 
     try {
       const postReq = await sales.Create(values)
-      console.log('Req',postReq)
+      console.log('Req', postReq)
       console.log('values',values)
     } catch (error) {
       console.error(error)
