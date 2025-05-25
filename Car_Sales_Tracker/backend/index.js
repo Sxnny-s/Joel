@@ -8,7 +8,7 @@ const { requireAuth } = require('@clerk/express')
 require('dotenv').config()
 app.use(express.json())
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: '*',
   credentials: true 
 }))
 app.use(requireAuth())
