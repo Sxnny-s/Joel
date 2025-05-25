@@ -5,6 +5,7 @@ import SalesChartDB from '@/components/ui/SalesChartDB';
 import TableDB from '@/components/ui/TableDB';
 import { SaleFromPopOver } from '@/components/ui/SaleFromPopOver';
 import AlertPopUp from '@/components/ui/alertPopUp';
+import LandingPage from './LandingPage';
 
 
 // Sales data
@@ -23,11 +24,6 @@ const Dashboard = () => {
   if (status === 'error') return <p> Error loading data: {error} </p>
   
   const DBstats = stats(data) 
-
-  
-  
-
-
 
   return (
     <div>
@@ -113,12 +109,10 @@ const Dashboard = () => {
         
               </div>
           </Card>
-
-
       </SignedIn>
+
       <SignedOut>
-        <p>Please sign in to view your dashboard.</p>
-        {/* <SignInButton /> */}
+        <LandingPage/>
       </SignedOut>
     </div>
   );

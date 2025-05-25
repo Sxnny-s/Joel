@@ -19,7 +19,6 @@ function App() {
     
       <SignedOut>
   
-        <SignInButton />
       </SignedOut>
       <SignedIn>
  
