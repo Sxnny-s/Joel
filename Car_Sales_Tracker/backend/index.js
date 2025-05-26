@@ -25,7 +25,7 @@ mongoose.connect(URL)
     .then(() => console.log('MongoDB Connected'))
     .catch((error) => console.error('MongoDb connection error:', error))
     
-app.use('/api/data',requireAuth(), Router)
+app.use('/api/data', Router)
 
 
 
