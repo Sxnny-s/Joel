@@ -3,8 +3,6 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const fetchUserSalesData = createAsyncThunk('/sales/DataById/' , async ({ id, token }) => {
 
-    
-
     const localURL = 'http://localhost:5000'
     const BASE_URL = 'https://car-api-0bgx.onrender.com'
     

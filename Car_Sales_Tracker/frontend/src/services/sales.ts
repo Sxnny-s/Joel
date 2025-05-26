@@ -1,24 +1,28 @@
 import axios from 'axios'
-    const localURL = 'http://localhost:5000'
-    const BASE_URL = 'https://car-api-0bgx.onrender.com'
+import { useAuth } from '@clerk/clerk-react'
 
+const BASE_URL = 'https://car-api-0bgx.onrender.com'
 
-const Create = async (data : any) => {
-    
+export const useSalesAPI = () => {
+  const { getToken } = useAuth()
+
+  const Create = async (data: any) => {
     const url = `${BASE_URL}/api/data/addCarSale`
+    const token = await getToken()
 
     try {
-        const res = await axios.post(`${url}`, data, {
-            withCredentials: true
-        })
-        return res.data
-    } catch (error) {
-        console.error('Error', error.message)
+      const res = await axios.post(url, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      })
+      return res.data
+    } catch (error: any) {
+      console.error('Error creating sale:', error.message)
     }
-    
+  }
+
+  return { Create }
+  
 }
-
-
-const sales = { Create }
-
-export default sales
