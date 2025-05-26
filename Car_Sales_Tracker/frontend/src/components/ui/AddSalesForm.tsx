@@ -23,7 +23,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 
-import { useSalesAPI } from '../../services/sales'
+import sales  from '../../services/sales'
 
 
 const formSchema = z.object({
@@ -87,7 +87,6 @@ const AddSalesForm = () => {
   
       // 5. Personnel
       salesperson: "",
-
     },
   });
   
@@ -95,19 +94,15 @@ const AddSalesForm = () => {
   // 2. Define a submit handler.
 
 
+  
+ async function onSubmit(values: z.infer<typeof formSchema>)  {
 
-  const { Create } = useSalesAPI()  
-
-  async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      const postReq = await Create(values) // 
+      const postReq = await sales.Create(values)
       console.log('Req', postReq)
-      console.log('values', values)
-
+      console.log('values',values)
     } catch (error) {
-
       console.error(error)
-
     }
   }
 
