@@ -60,7 +60,7 @@ const Dashboard = () => {
                     <Card className='w-full h-auto'>
                       <CardContent className='relative text-left'>
                         <div className='tracking-tight text-sm font-medium mb-2'>Total Profit</div>
-                        <div className='text-2xl font-bold'>${DBstats.TotalProfit}</div>
+                        <div className='text-2xl font-bold'>${DBstats.TotalProfit.toLocaleString()}</div>
                         <Wallet className="absolute top-1 right-4 h-5 w-5 text-muted-foreground" /> 
                         {/* <p className='text-xs text-muted-foreground'>+20.1% from last month</p> */}
                       </CardContent>
@@ -72,7 +72,7 @@ const Dashboard = () => {
                     <Card className='w-full h-auto'>
                       <CardContent className='relative text-left'>
                         <div className='tracking-tight text-sm font-medium mb-2'>Total Sales</div>
-                        <div className='text-2xl font-bold'>{DBstats.TotalSales}</div>
+                        <div className='text-2xl font-bold'>{DBstats.TotalSales.toLocaleString()}</div>
                         <Car className="absolute top-1 right-4 h-6 w-6 text-muted-foreground" />
                         {/* <p className='text-xs text-muted-foreground'>+3.1% from last month</p> */}
                       </CardContent>
@@ -84,7 +84,7 @@ const Dashboard = () => {
                     <Card className='w-full h-auto'>
                       <CardContent className='relative text-left'>
                         <div className='tracking-tight text-sm font-medium mb-2'>Sales/Profit  --- ( {new Date().toLocaleString('default', {month: 'long'})} )</div>
-                        <div className='text-2xl font-bold'>+{DBstats.SalesThisMonth} |  ${DBstats.ProfitThisMonth} </div>
+                        <div className='text-2xl font-bold'>+{DBstats.SalesThisMonth.toLocaleString()} |  ${DBstats.ProfitThisMonth.toLocaleString()} </div>
 
                         <BarChart3 className="absolute top-1 right-4 h-5 w-5 text-muted-foreground" />
 
