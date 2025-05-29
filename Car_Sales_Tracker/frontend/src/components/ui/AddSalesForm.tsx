@@ -95,10 +95,10 @@ const AddSalesForm = () => {
   // 2. Define a submit handler.
 
 
+  const { getToken } = useAuth();
   
  async function onSubmit(values: z.infer<typeof formSchema>)  {
 
-    const { getToken } = useAuth();
     const token = await getToken()
 
     try {
