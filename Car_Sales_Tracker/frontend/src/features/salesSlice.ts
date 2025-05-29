@@ -27,7 +27,11 @@ const salesSlice = createSlice({
         status: 'idle',
         error: null
     },
-    reducers: {},
+    reducers: {
+        addSale: (state, action) => {
+            state.data.push(action.payload)
+        }
+    },
     extraReducers: (builder) => {
         builder
             .addCase(fetchUserSalesData.pending , (state ) => {
@@ -45,5 +49,6 @@ const salesSlice = createSlice({
 
 })
 
+export const { addSale } = salesSlice.actions 
 export { fetchUserSalesData }
 export default salesSlice.reducer

@@ -2,6 +2,8 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useAuth } from '@clerk/clerk-react';
+import { useDispatch, UseDispatch } from 'react-redux';
+import { addSale } from '@/features/salesSlice';
 
 
 import { Button } from "@/components/ui/button"
@@ -25,7 +27,6 @@ import {
 } from "@/components/ui/select"
 
 import sales  from '../../services/sales'
-
 
 const formSchema = z.object({
 
@@ -56,6 +57,8 @@ const formSchema = z.object({
   // 5. Personnel
   salesperson: z.string().min(2, { message: "Sales person name is required." }),
 });
+
+
 
 const AddSalesForm = () => {
    
@@ -93,11 +96,10 @@ const AddSalesForm = () => {
   
 
   // 2. Define a submit handler.
-
-
   const { getToken } = useAuth();
+  const dispatch = useDispatch()
   
- async function onSubmit(values: z.infer<typeof formSchema>)  {
+  async function onSubmit(values: z.infer<typeof formSchema>)  {
 
     const token = await getToken()
 
@@ -105,6 +107,8 @@ const AddSalesForm = () => {
       const postReq = await sales.Create(values, token )
       console.log('Req', postReq)
       console.log('values',values)
+      dispatch(addSale(postReq))
+      
     } catch (error) {
       console.error(error)
     }

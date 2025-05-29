@@ -30,7 +30,6 @@ const Dashboard = () => {
       <SignedIn>
 
         <h1 className='mb-8'>Welcome to your Dashboard!</h1>
-        
 
         <AlertPopUp/>
 
