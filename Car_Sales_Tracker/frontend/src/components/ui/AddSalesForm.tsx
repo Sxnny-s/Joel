@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from "@hookform/resolvers/zod"
+import { useAuth } from '@clerk/clerk-react';
 
 
 import { Button } from "@/components/ui/button"
@@ -97,8 +98,11 @@ const AddSalesForm = () => {
   
  async function onSubmit(values: z.infer<typeof formSchema>)  {
 
+    const { getToken } = useAuth();
+    const token = await getToken()
+
     try {
-      const postReq = await sales.Create(values)
+      const postReq = await sales.Create(values, token )
       console.log('Req', postReq)
       console.log('values',values)
     } catch (error) {
