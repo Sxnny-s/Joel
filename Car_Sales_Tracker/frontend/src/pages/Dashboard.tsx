@@ -44,7 +44,7 @@ const Dashboard = () => {
 
                       <CardContent className='relative text-left'>
                           <div className='tracking-tight text-sm font-medium mb-2'>Total Revenue</div>
-                          <div className='text-2xl font-bold'>${DBstats.TotalRev} </div>
+                          <div className='text-2xl font-bold'>${DBstats.TotalRev.toLocaleString()} </div>
                         
                           <DollarSign className="absolute top-1 right-4 h-5 w-5 text-muted-foreground" />
 
